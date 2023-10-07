@@ -89,9 +89,9 @@ func (p *MsgParser) Read(conn *TCPConn) ([]byte, error) {
 			msgLen = binary.BigEndian.Uint32(bufMsgLen)
 		}
 	}
-
 	// check len
 	if msgLen > p.maxMsgLen {
+
 		return nil, errors.New("message too long")
 	} else if msgLen < p.minMsgLen {
 		return nil, errors.New("message too short")

@@ -1,8 +1,9 @@
 {
 	"LogLevel": "debug",
 	"LogPath": "",
-	"TCPAddr": "127.0.0.1:3563",
+	"TCPAddr": "192.168.1.110:3563",
 	"MaxConnNum": 20000,
+	"ConsolePort":3333,
 	"go.goroot":"/usr/local/go",
 	"go.gopath":"/home/zjh/server_unity_go"
 }

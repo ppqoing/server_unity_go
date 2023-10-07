@@ -7,10 +7,11 @@ import (
 var Processor = json.NewProcessor()
 
 func init() {
-	Processor.Register(&Hello{})
+	Processor.Register(&Login{})
 }
 
-type Hello struct {
-	Name string
-	Id   int
+type Login struct {
+	UserId    string
+	Password  string
+	UserIndex int64
 }
