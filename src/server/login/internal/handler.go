@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"reflect"
 	"server/msg"
 
@@ -22,12 +21,11 @@ func init() {
 func handleLogin(args []interface{}) {
 	m := args[0].(*msg.Login)
 	a := args[1].(gate.Agent)
-	log.Debug("userId: %v \tpassword: %v\t userindex: %v", m.UserId, m.Password, m.UserIndex)
-	res, err := mongodb.Add_one(m, mongodb.Database_golang_server, mongodb.Collection_login)
+	_, err := mongodb.Add_one(m, mongodb.Database_golang_server, mongodb.Collection_login)
 	if err != nil {
 		log.Error(err.Error())
 	}
-	fmt.Println(res)
+	log.Debug(a.LocalAddr().String())
 	a.WriteMsg(&msg.Login{
 		UserId:    "ppqoing",
 		Password:  "zjhzjh147",
