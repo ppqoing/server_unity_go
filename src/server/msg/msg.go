@@ -9,9 +9,3 @@ var Processor = json.NewProcessor()
 func init() {
 	Processor.Register(&Login{})
 }
-
-type Login struct {
-	UserId    string
-	Password  string
-	UserIndex int64
-}
