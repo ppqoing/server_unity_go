@@ -74,25 +74,41 @@ import (
 )
 
 func main() {
+	//client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	//userCollection := client.Database("golang_server").Collection("Login")
+	// var temp Login
+	// temp.Password = "pppp"
+	// temp.UserId = "oooo"
+	// temp.UserIndex = 9876675765
+
+	// log_msg, err_m := json.Marshal(temp)
+	// if err_m != nil {
+	// 	fmt.Println(err_m)
+	// }
+	// fmt.Println(string(log_msg))
+	// res, err_c := userCollection.InsertOne(context.TODO(), log_msg)
+	// if err_c != nil {
+	// 	panic(err_c)
+	// }
+	// fmt.Println(res.InsertedID)
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err.Error())
 	}
-	userCollection := client.Database("golang_server").Collection("Login")
-	var temp Login
-	temp.Password = "pppp"
-	temp.UserId = "oooo"
-	temp.UserIndex = 9876675765
-	log_msg, err_m := bson.Marshal(temp)
-	if err_m != nil {
-		fmt.Println(err_m)
+	handle_coll := client.Database("golang_server").Collection("Login")
+	fielter := bson.D{{"password", "pppp"}}
+	var res Login
+	err_ccc := handle_coll.FindOne(context.TODO(), fielter).Decode(&res)
+	if err_ccc != nil {
+		fmt.Println(err_ccc.Error())
+	} else {
+		fmt.Println(res.UserId)
+		fmt.Println(res.UserIndex)
 	}
-	fmt.Println(string(log_msg))
-	res, err_c := userCollection.InsertOne(context.TODO(), log_msg)
-	if err_c != nil {
-		panic(err_c)
-	}
-	fmt.Println(res.InsertedID)
+
 }
 
 type Login struct {
